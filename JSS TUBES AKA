@@ -1,0 +1,44 @@
+let chart;
+
+async function runComparison() {
+  const n = document.getElementById("nValue").value;
+
+  if (!n || n <= 0 || n > 10000) {
+    alert("Masukkan nilai n antara 1 - 10000");
+    return;
+  }
+
+  const response = await fetch("http://localhost:8080/api/compare", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ n: parseInt(n) })
+  });
+
+  const data = await response.json();
+
+  document.getElementById("iteratifResult").innerText =
+    `Iteratif: ${data.iteratif_ns} ns`;
+
+  document.getElementById("rekursifResult").innerText =
+    `Rekursif: ${data.rekursif_ns} ns`;
+
+  renderChart(data.iteratif_ns, data.rekursif_ns);
+}
+
+function renderChart(iteratif, rekursif) {
+  const ctx = document.getElementById("resultChart").getContext("2d");
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Iteratif", "Rekursif"],
+      datasets: [{
+        label: "Waktu Eksekusi (ns)",
+        data: [iteratif, rekursif],
+        backgroundColor: ["#22c55e", "#ef4444"]
+      }]
+    }
+  });
+}

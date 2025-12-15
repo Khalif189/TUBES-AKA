@@ -1,0 +1,29 @@
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Perbandingan Algoritma Max Array</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h1>Perbandingan Algoritma</h1>
+  <p>Iteratif vs Rekursif (Go)</p>
+
+  <div class="input-group">
+    <input type="number" id="nValue" placeholder="Masukkan nilai n (<=10000)">
+    <button onclick="runComparison()">Jalankan</button>
+  </div>
+
+  <canvas id="resultChart"></canvas>
+
+  <div class="result">
+    <p id="iteratifResult">Iteratif: -</p>
+    <p id="rekursifResult">Rekursif: -</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
